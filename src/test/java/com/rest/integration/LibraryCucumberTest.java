@@ -16,7 +16,7 @@ public class LibraryCucumberTest {
 
     @ClassRule
     public static final DropwizardAppRule<LibraryConfiguration> RULE =
-            new DropwizardAppRule<LibraryConfiguration>(LibraryApplication.class, "/Users/prakash/projects/gruppopam/DropwizardREST/configuration.yml");
+            new DropwizardAppRule<LibraryConfiguration>(LibraryApplication.class, "configuration.yml");
 
 
 
