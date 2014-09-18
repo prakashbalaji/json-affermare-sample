@@ -94,3 +94,82 @@ Feature: Authors
     Then I verify the list of author ids are present in the same order
       | 123 |
       | 124 |
+
+  Scenario: Verify the collection for filtered items
+    Then I make a GET to "authors/filter.json" with params
+      | name |
+      | Beck |
+
+    Then I verify that the following authors are present
+      | id  | name |
+      | 124 | Beck |
+
+  Scenario: Verify the collection for multiple filtered
+    Then I make a GET to "authors/multi_filter.json" with params
+      | id  | name |
+      | 124 | Beck |
+
+    Then I verify that the following authors are present
+      | id  | name |
+      | 124 | Beck |
+
+  Scenario: Verify the collection put request
+    Then I make a PUT to "authors/put_no_data.json"
+
+    Then I verify that the following authors are present
+      | id  | name   |
+      | 123 | Fowler |
+      | 124 | Beck   |
+
+
+  Scenario: Verify the collection put request with data
+    Then I make a PUT to "authors/put.json" with data
+      | {                       |
+      | "id": 123,              |
+      | "name": "Martin Fowler" |
+      | }                       |
+
+    Then I verify that the following authors are present
+      | id  | name          |
+      | 123 | Martin Fowler |
+      | 124 | Beck          |
+
+
+  Scenario: Verify the collection post request
+    Then I make a POST to "authors/post_no_data.json"
+
+    Then I verify that the following authors are present
+      | id  | name   |
+      | 123 | Fowler |
+      | 124 | Beck   |
+
+
+  Scenario: Verify the collection post request with data
+    Then I make a POST to "authors/post.json" with data
+      | {                       |
+      | "id": 123,              |
+      | "name": "Martin Fowler" |
+      | }                       |
+
+    Then I verify that the following authors are present
+      | id  | name          |
+      | 123 | Martin Fowler |
+
+
+  Scenario: Verify the collection delete
+    Then I make a DELETE to "authors/123.json"
+
+    Then I verify that the following authors are present
+      | id  | name   |
+      | 124 | Beck   |
+
+
+  #TODO: Empty list while expecting something should fail more meaningfully than array out of bounds
+  #Scenario: Verify the collection for filtered items
+  #  Then I make a GET to "authors/filter.json" with params
+  #    | name |
+  #    | beck |
+  #
+  #  Then I verify that the following authors are present
+  #    | id  | name |
+  #    | 124 | Beck |

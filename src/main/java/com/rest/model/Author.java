@@ -5,10 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 public class Author {
-    private final Integer id;
-    private final String name;
+    private Integer id;
+    private String name;
 
-    private final List<Phone> phoneNumbers;
+    private List<Phone> phoneNumbers;
+
+    public Author() {
+    }
 
     public Author(Integer id, String name, List<Phone> phoneNumbers) {
         this.id = id;

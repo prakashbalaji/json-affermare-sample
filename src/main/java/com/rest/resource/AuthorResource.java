@@ -3,10 +3,7 @@ package com.rest.resource;
 import com.rest.model.ApplicationError;
 import com.rest.model.Author;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -20,6 +17,7 @@ import static javax.ws.rs.core.Response.Status.PRECONDITION_FAILED;
 
 @Path("/authors")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class AuthorResource {
 
     public AuthorResource() {
@@ -55,12 +53,56 @@ public class AuthorResource {
         return FOWLER;
     }
 
+    @DELETE
+    @Path("/{authorId}.json")
+    public List<Author> deleteById() {
+        return asList(BECK);
+    }
+
     @GET
     @Path("/error.json")
     public Response errorWithDetails() {
         return Response.status(PRECONDITION_FAILED).type(APPLICATION_JSON_TYPE)
                 .entity(new GenericEntity<List<ApplicationError>>(asList(MISSING_NAME, MISSING_PHONE)) {
                 }).build();
+    }
+
+    @GET
+    @Path("/filter.json")
+    public List<Author> filteredAuthors(@QueryParam("name") String name) {
+        return name.equals("Beck") ? asList(BECK) : EMPTY_LIST;
+    }
+
+    @GET
+    @Path("/multi_filter.json")
+    public List<Author> multiFilteredAuthors(@QueryParam("name") String name, @QueryParam("id") Integer id) {
+        return id == 124 && name.equals("Beck") ? asList(BECK) : EMPTY_LIST;
+    }
+
+
+    @PUT
+    @Path("/put_no_data.json")
+    public List<Author> putNoData() {
+        return asList(BECK, FOWLER);
+    }
+
+    @PUT
+    @Path("/put.json")
+    public List<Author> put(Author author) {
+        return asList(BECK, author);
+    }
+
+
+    @POST
+    @Path("/post_no_data.json")
+    public List<Author> postNoData() {
+        return asList(BECK, FOWLER);
+    }
+
+    @POST
+    @Path("/post.json")
+    public List<Author> post(Author author) {
+        return asList(author);
     }
 
 
