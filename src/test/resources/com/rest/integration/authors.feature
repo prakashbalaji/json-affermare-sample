@@ -160,8 +160,8 @@ Feature: Authors
     Then I make a DELETE to "authors/123.json"
 
     Then I verify that the following authors are present
-      | id  | name   |
-      | 124 | Beck   |
+      | id  | name |
+      | 124 | Beck |
 
 
   #TODO: Empty list while expecting something should fail more meaningfully than array out of bounds
@@ -173,3 +173,15 @@ Feature: Authors
   #  Then I verify that the following authors are present
   #    | id  | name |
   #    | 124 | Beck |
+
+  Scenario: Verify a list of item with associated collection
+    Then I make a GET to "authors/with_phone.json"
+    Then I filter the authors with "id" is "123" and has the following "phone_numbers"
+      | type   | number    |
+      | office | 987654321 |
+      | home   | 123456789 |
+    Then I filter the authors with "id" is "124" and has the following "phone_numbers"
+      | type   | number   |
+      | office | 87654321 |
+      | home   | 23456789 |
+

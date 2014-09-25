@@ -79,6 +79,12 @@ public class AuthorResource {
         return id == 124 && name.equals("Beck") ? asList(BECK) : EMPTY_LIST;
     }
 
+    @GET
+    @Path("/with_phone.json")
+    public List<Author> authorsWithPhone() {
+        return asList(FOWLER, BECK_WITH_PHONE);
+    }
+
 
     @PUT
     @Path("/put_no_data.json")
