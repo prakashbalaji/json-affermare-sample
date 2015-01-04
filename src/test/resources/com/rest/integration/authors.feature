@@ -54,18 +54,13 @@ Feature: Authors
       | id  | name   |
       | 123 | Fowler |
 
-
-  #TODO - support this through proper collection assertion
-#  Scenario: Verify a item with associated collection
-#    Then I make a GET to "authors/123.json"
-#    Then I verify that the json has the following "authors"
-#      | id  | name   |
-#      | 123 | Fowler |
-#    Then I verify that author has the following "phone_numbers"
-#      | type   | number    |
-#      | office | 987654321 |
-#      | home   | 123456789 |
-
+  Scenario: Verify a item with associated collection
+    Then I make a GET to "authors/123.json"
+    Then I print json
+    Then I verify that the json has the following "author with phone numbers"
+      | id  | name   | phone_numbers.type | phone_numbers.number |
+      | 123 | Fowler | office             | 987654321            |
+      | 123 | Fowler | home               | 123456789            |
 
   Scenario: Verify response code
     Then I make a GET to "authors/all.json"
@@ -175,7 +170,7 @@ Feature: Authors
   #    | id  | name |
   #    | 124 | Beck |
 
-  Scenario: Verify a list of item with associated collection
+  Scenario: Verify a list of item with associated collection after applying filter
     Then I make a GET to "authors/with_phone.json"
     Then I filter the authors with "id" is "123" and has the following "phone_numbers"
       | type   | number    |
@@ -187,3 +182,20 @@ Feature: Authors
       | home   | 23456789 |
 
     Then I verify that the json has 2 authors
+
+  Scenario: Verify a list of item with associated collection
+    Then I make a GET to "authors/with_phone.json"
+
+    Then I print json
+
+    Then I verify that the json has the following "authors with phone numbers"
+      | id  | name   | phone_numbers.type | phone_numbers.number | phone_numbers.emails.provider |
+      | 123 | Fowler | office             | 987654321            | gmail.com                     |
+      | 123 | Fowler | office             | 987654321            | yahoo.com                     |
+      | 123 | Fowler | home               | 123456789            | gmail.com                     |
+      | 123 | Fowler | home               | 123456789            | yahoo.com                     |
+      | 124 | Beck   | office             | 87654321             | gmail.com                     |
+      | 124 | Beck   | office             | 87654321             | yahoo.com                     |
+      | 124 | Beck   | home               | 23456789             | gmail.com                     |
+      | 124 | Beck   | home               | 23456789             | yahoo.com                     |
+

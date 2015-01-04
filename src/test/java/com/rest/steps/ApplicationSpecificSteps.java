@@ -1,6 +1,7 @@
 package com.rest.steps;
 
 import com.rest.request.JerseyClient;
+import com.rest.response.ResponseStorage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -21,4 +22,8 @@ public class ApplicationSpecificSteps {
         JerseyClient.initialize(String.format("http://localhost:%d/", RULE.getLocalPort()));
     }
 
+    @Then("^I print json$")
+    public void I_print_json() throws Throwable {
+        System.out.println(ResponseStorage.response.json());
+    }
 }
