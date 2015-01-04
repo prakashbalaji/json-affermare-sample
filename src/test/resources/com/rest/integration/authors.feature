@@ -189,13 +189,13 @@ Feature: Authors
     Then I print json
 
     Then I verify that the json has the following "authors with phone numbers"
-      | id  | name   | phone_numbers.type | phone_numbers.number | phone_numbers.emails.provider |
-      | 123 | Fowler | office             | 987654321            | gmail.com                     |
-      | 123 | Fowler | office             | 987654321            | yahoo.com                     |
-      | 123 | Fowler | home               | 123456789            | gmail.com                     |
-      | 123 | Fowler | home               | 123456789            | yahoo.com                     |
-      | 124 | Beck   | office             | 87654321             | gmail.com                     |
-      | 124 | Beck   | office             | 87654321             | yahoo.com                     |
-      | 124 | Beck   | home               | 23456789             | gmail.com                     |
-      | 124 | Beck   | home               | 23456789             | yahoo.com                     |
+      | id  | name   | phone_numbers.type | phone_numbers.number |
+      | 123 | Fowler | office             | 987654321            |
+      | 123 | Fowler | office             | 987654321            |
+      | 123 | Fowler | home               | 123456789            |
+      | 123 | Fowler | home               | 123456789            |
+      | 124 | Beck   | office             | 87654321             |
+      | 124 | Beck   | office             | 87654321             |
+      | 124 | Beck   | home               | 23456789             |
+      | 124 | Beck   | home               | 23456789             |
 
