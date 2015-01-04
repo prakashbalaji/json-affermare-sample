@@ -1,6 +1,7 @@
 package com.rest.steps;
 
 import com.rest.request.JerseyClient;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -19,6 +20,5 @@ public class ApplicationSpecificSteps {
     public void I_start_server() throws Throwable {
         JerseyClient.initialize(String.format("http://localhost:%d/", RULE.getLocalPort()));
     }
-
 
 }
