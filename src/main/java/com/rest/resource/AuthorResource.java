@@ -8,6 +8,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Objects;
 
 import static com.rest.dao.MockDAO.*;
 import static java.util.Arrays.asList;
@@ -98,6 +99,15 @@ public class AuthorResource {
         return asList(BECK, author);
     }
 
+    @PUT
+    @Path("/put_with_headers.json")
+    public List<Author> putWithHeader(Author author,@HeaderParam("client-id") String clientToken) {
+        if(Objects.equals(clientToken, "1")){
+            return asList(author);
+        }
+        return EMPTY_LIST;
+    }
+
 
     @POST
     @Path("/post_no_data.json")
@@ -111,5 +121,13 @@ public class AuthorResource {
         return asList(author);
     }
 
+    @POST
+    @Path("/post_with_headers.json")
+    public List<Author> postWithHeader(Author author,@HeaderParam("client-id") String clientToken) {
+        if(Objects.equals(clientToken, "1")){
+            return asList(author);
+        }
+        return EMPTY_LIST;
+    }
 
 }
