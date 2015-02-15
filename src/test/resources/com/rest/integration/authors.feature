@@ -131,7 +131,7 @@ Feature: Authors
       | 124 | Beck          |
 
   Scenario: Verify the collection put request with data with headers
-    Then I make a PUT to "authors/put_with_headers.json" with header "client-id=1" with body
+    Then I make a PUT to "authors/put_with_headers.json" with header "client-id=1,client-name=martin" with body
       | {                       |
       | "id": 123,              |
       | "name": "Martin Fowler" |
@@ -164,7 +164,7 @@ Feature: Authors
       | 123 | Martin Fowler |
 
   Scenario: Verify the collection post request with data with headers
-    Then I make a POST to "authors/post_with_headers.json" with header "client-id=1" with body
+    Then I make a POST to "authors/post_with_headers.json" with header "client-id=1,client-name=martin" with body
       | {                       |
       | "id": 123,              |
       | "name": "Martin Fowler" |

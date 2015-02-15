@@ -101,8 +101,8 @@ public class AuthorResource {
 
     @PUT
     @Path("/put_with_headers.json")
-    public List<Author> putWithHeader(Author author,@HeaderParam("client-id") String clientToken) {
-        if(Objects.equals(clientToken, "1")){
+    public List<Author> putWithHeader(Author author,@HeaderParam("client-id") String clientTokenId,@HeaderParam("client-name") String clientTokenName) {
+        if(Objects.equals(clientTokenId, "1") && Objects.equals(clientTokenName, "martin")){
             return asList(author);
         }
         return EMPTY_LIST;
@@ -123,8 +123,8 @@ public class AuthorResource {
 
     @POST
     @Path("/post_with_headers.json")
-    public List<Author> postWithHeader(Author author,@HeaderParam("client-id") String clientToken) {
-        if(Objects.equals(clientToken, "1")){
+    public List<Author> postWithHeader(Author author,@HeaderParam("client-id") String clientTokenId,@HeaderParam("client-name") String clientTokenName) {
+        if(Objects.equals(clientTokenId, "1") && Objects.equals(clientTokenName, "martin")){
             return asList(author);
         }
         return EMPTY_LIST;
